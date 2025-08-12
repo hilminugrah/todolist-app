@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, lazy, Suspense } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodos } from '../redux/actions/todoActions';
-import TodoForm from '../components/TodoForm';
-import TodoList from '../components/TodoList';
+
+
+const TodoForm = lazy(() => import('../components/TodoForm'));
+const TodoList = lazy(() => import('../components/TodoList'));
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -12,8 +14,9 @@ function Dashboard() {
     dispatch(fetchTodos());
   }, [dispatch]);
 
-  const completedCount = todos.filter((todo) => todo.completed).length;
-  const incompleteCount = todos.filter((todo) => !todo.completed).length;
+  
+  const completedCount = useMemo(() => todos.filter(todo => todo.completed).length, [todos]);
+  const incompleteCount = useMemo(() => todos.filter(todo => !todo.completed).length, [todos]);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-start justify-center py-10 px-4 sm:px-6 lg:px-8">
@@ -24,7 +27,9 @@ function Dashboard() {
               <span className="text-blue-400">To</span>
               <span className="text-purple-600">do</span>
             </h1>
-            <TodoForm />
+            <Suspense fallback={<div>Loading form...</div>}>
+              <TodoForm />
+            </Suspense>
           </div>
         </div>
         <div className="mt-20 flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-0 text-sm sm:text-base text-gray-700">
@@ -49,7 +54,9 @@ function Dashboard() {
           {error && (
             <p className="text-center text-sm sm:text-base text-red-500">Error: {error}</p>
           )}
-          <TodoList todos={todos} />
+          <Suspense fallback={<div>Loading todos...</div>}>
+            <TodoList />
+          </Suspense>
         </div>
       </div>
     </div>
