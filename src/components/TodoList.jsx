@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTodos } from '../redux/actions/todoActions';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import TodoItem from './TodoItem';
 
 function TodoList() {
-  const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos.todos); // ← perbaikan di sini
+  const todos = useSelector((state) => state.todos.todos);
   const loading = useSelector((state) => state.todos.loading);
   const error = useSelector((state) => state.todos.error);
-
-  useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
 
   return (
     <div className="flex justify-center bg-gray-100 min-h-screen py-10">
@@ -31,4 +25,4 @@ function TodoList() {
   );
 }
 
-export default TodoList;
+export default React.memo(TodoList);

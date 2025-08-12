@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`TodoForm Component sesuai snapshot 1`] = `
+<DocumentFragment>
+  <form
+    class="flex items-center gap-2 mb-6 w-full max-w-xl mx-auto mt-8"
+  >
+    <input
+      class="flex-1 border border-gray-500 rounded px-3 py-2 shadow-sm focus:outline-none"
+      placeholder="Tambah tugas baru"
+      type="text"
+      value=""
+    />
+    <button
+      class="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-500 transition flex items-center gap-2"
+      type="submit"
+    >
+      <span>
+        Tambah
+      </span>
+      <span
+        class="text-lg"
+      >
+        +
+      </span>
+    </button>
+  </form>
+</DocumentFragment>
+`;

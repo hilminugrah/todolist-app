@@ -15,7 +15,11 @@ function TodoItem({ todo }) {
   };
 
   return (
-    <li className={`flex justify-between items-center p-4 rounded-lg border border-gray-500 shadow-md ${todo.completed ? 'bg-gray-300' : 'bg-white'}`}>
+    <li
+      className={`flex justify-between items-center p-4 rounded-lg border border-gray-500 shadow-md ${
+        todo.completed ? 'bg-gray-300' : 'bg-white'
+      }`}
+    >
       <div className="flex items-center space-x-3 relative">
         <input
           type="checkbox"
@@ -39,4 +43,4 @@ function TodoItem({ todo }) {
   );
 }
 
-export default TodoItem;
+export default React.memo(TodoItem);
